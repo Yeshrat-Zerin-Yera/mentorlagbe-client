@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
+// import Navbar from "@/components/layout/Navbar";
 import {
   ArrowRight,
   BookOpen,
@@ -71,8 +71,8 @@ export default async function Home() {
 
   return (
     <main className="overflow-hidden">
-      {/* Navbar */}
-      <Navbar />
+      {/* Navbar
+      <Navbar /> */}
 
       {/* Hero */}
       <section className="relative bg-[#f0f7f4]">
