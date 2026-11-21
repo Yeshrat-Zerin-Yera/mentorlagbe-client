@@ -4,6 +4,7 @@ import TuitionSearch from "@/components/home/TuitionSearch";
 import FeaturedTuitions, {
   type Tuition,
 } from "@/components/home/FeaturedTuitions";
+import PopularSubjects from "@/components/home/PopularSubjects";
 import HowItWorks from "@/components/home/HowItWorks";
 import PricingPreview from "@/components/home/PricingPreview";
 import { Search, Users, GraduationCap } from "lucide-react";
@@ -33,7 +34,7 @@ const steps = [
 ];
 
 export default async function Home() {
-  let featuredTuitions: Tuition[] = [];
+  let allTuitions: Tuition[] = [];
 
   try {
     const response = await fetch("http://localhost:5000/api/tuitions", {
@@ -42,20 +43,45 @@ export default async function Home() {
 
     if (response.ok) {
       const result = await response.json();
-      featuredTuitions = Array.isArray(result.data)
-        ? result.data.slice(0, 6)
-        : [];
+
+      allTuitions = Array.isArray(result.data) ? result.data : [];
     }
   } catch (error) {
-    console.error("Failed to load featured tuitions:", error);
+    console.error("Failed to load homepage tuitions:", error);
   }
+
+  const featuredTuitions = allTuitions.slice(0, 6);
+
+  const subjectCounts = allTuitions.reduce(
+    (counts, tuition) => {
+      const subject = tuition.subject?.trim();
+
+      if (subject) {
+        counts[subject] = (counts[subject] || 0) + 1;
+      }
+
+      return counts;
+    },
+    {} as Record<string, number>
+  );
+
+  const popularSubjects = Object.entries(subjectCounts)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 6);
 
   return (
     <main className="overflow-hidden">
       <Hero />
+
       <TuitionSearch />
+
       <FeaturedTuitions featuredTuitions={featuredTuitions} />
+
+      <PopularSubjects subjects={popularSubjects} />
+
       <HowItWorks steps={steps} />
+
       <PricingPreview />
     </main>
   );
