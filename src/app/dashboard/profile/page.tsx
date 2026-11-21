@@ -1,9 +1,9 @@
 
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
+import { ImagePlus, LoaderCircle, Save, UserRound } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-import { LoaderCircle, Save, UserRound } from "lucide-react";
 
 type Profile = {
   id: string;
@@ -27,6 +27,89 @@ export default function ProfilePage() {
   const [phone, setPhone] = useState("");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState("");
+
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  const handleImageUpload = async (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setError("Please select a valid image.");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Image size must be less than 5 MB.");
+      return;
+    }
+
+    try {
+      setError("");
+      setSuccess("");
+      setUploadingImage(true);
+
+      const tokenResponse = await authClient.token();
+      const token = tokenResponse.data?.token;
+
+      if (tokenResponse.error || !token) {
+        throw new Error("Your session has expired. Please sign in again.");
+      }
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const response = await fetch(
+        `${API_URL}/api/users/profile-image`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success || !result.data?.url) {
+        throw new Error(result.message || "Image upload failed.");
+      }
+
+      const imageUrl = result.data.url;
+
+      // Save the uploaded image URL immediately.
+      const saveResponse = await fetch(`${API_URL}/api/users/me`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ image: imageUrl }),
+      });
+
+      const saveResult = await saveResponse.json();
+
+      if (!saveResponse.ok || !saveResult.success) {
+        throw new Error(saveResult.message || "Failed to save profile picture.");
+      }
+
+      setImage(saveResult.data.image || imageUrl);
+      setProfile(saveResult.data);
+      setSuccess("Profile picture saved successfully.");
+      setSuccess("Image uploaded. Click Save Profile to apply it.");
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Image upload failed."
+      );
+    } finally {
+      setUploadingImage(false);
+      event.target.value = "";
+    }
+  };
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -312,18 +395,46 @@ export default function ProfilePage() {
 
             <div>
               <label className="mb-2 block text-sm font-semibold text-gray-700">
-                Profile Image URL
+                Profile Picture
               </label>
-              <input
-                type="url"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-[#267653] focus:ring-2 focus:ring-[#267653]/10"
-                placeholder="Paste your image URL"
-              />
-              <p className="mt-1 text-xs text-gray-400">
-                Paste a direct HTTP or HTTPS image URL.
-              </p>
+
+              <div className="flex flex-wrap items-center gap-4">
+                {image ? (
+                  <img
+                    src={image}
+                    alt="Profile preview"
+                    className="h-20 w-20 rounded-full border border-gray-200 object-cover"
+                  />
+                ) : (
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-100 text-gray-400">
+                    <UserRound className="h-9 w-9" />
+                  </div>
+                )}
+
+                <div>
+                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-[#267653] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#1d6042]">
+                    {uploadingImage ? (
+                      <LoaderCircle className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <ImagePlus className="h-4 w-4" />
+                    )}
+
+                    {uploadingImage ? "Uploading..." : "Choose Image"}
+
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      disabled={uploadingImage}
+                      className="hidden"
+                    />
+                  </label>
+
+                  <p className="mt-2 text-xs text-gray-400">
+                    JPG, PNG or other image formats. Maximum 5 MB.
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div>
