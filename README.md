@@ -5,7 +5,11 @@ MentorLagbe is a full-stack tuition and mentorship platform that connects studen
 
 ## Live Website
 
-Add your deployed frontend URL here.
+[https://mentorlagbe-client-jet.vercel.app](https://mentorlagbe-client-jet.vercel.app)
+
+## Server
+
+[https://mentorlagbe-server-87cn.onrender.com](https://mentorlagbe-server-87cn.onrender.com)
 
 ## Features
 
@@ -71,7 +75,7 @@ Add your deployed frontend URL here.
 ### Clone the Repository
 
 ```bash
-git clone YOUR_CLIENT_REPOSITORY_URL
+git clone https://github.com/Yeshrat-Zerin-Yera/mentorlagbe-client
 ```
 
 Navigate to the project directory:
