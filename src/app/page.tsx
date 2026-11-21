@@ -13,11 +13,20 @@ import { Search, Users, GraduationCap } from "lucide-react";
 type PlatformStatsData = {
   totalTuitions: number;
   totalSubjects: number;
+  totalStudents: number;
+  totalTutors: number;
+  popularSubjects: {
+    name: string;
+    count: number;
+  }[];
 };
 
 const emptyStats: PlatformStatsData = {
   totalTuitions: 0,
   totalSubjects: 0,
+  totalStudents: 0,
+  totalTutors: 0,
+  popularSubjects: [],
 };
 
 const steps = [
@@ -76,6 +85,11 @@ export default async function Home() {
         platformStats = {
           totalTuitions: Number(result.data.totalTuitions) || 0,
           totalSubjects: Number(result.data.totalSubjects) || 0,
+          totalStudents: Number(result.data.totalStudents) || 0,
+          totalTutors: Number(result.data.totalTutors) || 0,
+          popularSubjects: Array.isArray(result.data.popularSubjects)
+            ? result.data.popularSubjects
+            : [],
         };
       }
     }
@@ -85,30 +99,12 @@ export default async function Home() {
 
   const featuredTuitions = allTuitions.slice(0, 6);
 
-  const subjectCounts = allTuitions.reduce(
-    (counts, tuition) => {
-      const subject = tuition.subject?.trim();
-
-      if (subject) {
-        counts[subject] = (counts[subject] || 0) + 1;
-      }
-
-      return counts;
-    },
-    {} as Record<string, number>
-  );
-
-  const popularSubjects = Object.entries(subjectCounts)
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 6);
-
   return (
     <main className="overflow-hidden">
       <Hero />
       <TuitionSearch />
       <FeaturedTuitions featuredTuitions={featuredTuitions} />
-      <PopularSubjects subjects={popularSubjects} />
+      <PopularSubjects subjects={platformStats.popularSubjects} />
       <PlatformStats stats={platformStats} />
       <HowItWorks steps={steps} />
       <PricingPreview />
