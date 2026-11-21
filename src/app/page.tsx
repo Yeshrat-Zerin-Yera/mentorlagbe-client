@@ -5,9 +5,20 @@ import FeaturedTuitions, {
   type Tuition,
 } from "@/components/home/FeaturedTuitions";
 import PopularSubjects from "@/components/home/PopularSubjects";
+import PlatformStats from "@/components/home/PlatformStats";
 import HowItWorks from "@/components/home/HowItWorks";
 import PricingPreview from "@/components/home/PricingPreview";
 import { Search, Users, GraduationCap } from "lucide-react";
+
+type PlatformStatsData = {
+  totalTuitions: number;
+  totalSubjects: number;
+};
+
+const emptyStats: PlatformStatsData = {
+  totalTuitions: 0,
+  totalSubjects: 0,
+};
 
 const steps = [
   {
@@ -35,6 +46,7 @@ const steps = [
 
 export default async function Home() {
   let allTuitions: Tuition[] = [];
+  let platformStats: PlatformStatsData = emptyStats;
 
   try {
     const response = await fetch("http://localhost:5000/api/tuitions", {
@@ -43,11 +55,32 @@ export default async function Home() {
 
     if (response.ok) {
       const result = await response.json();
-
       allTuitions = Array.isArray(result.data) ? result.data : [];
     }
   } catch (error) {
     console.error("Failed to load homepage tuitions:", error);
+  }
+
+  try {
+    const response = await fetch(
+      "http://localhost:5000/api/tuitions/stats",
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (response.ok) {
+      const result = await response.json();
+
+      if (result.success && result.data) {
+        platformStats = {
+          totalTuitions: Number(result.data.totalTuitions) || 0,
+          totalSubjects: Number(result.data.totalSubjects) || 0,
+        };
+      }
+    }
+  } catch (error) {
+    console.error("Failed to load homepage statistics:", error);
   }
 
   const featuredTuitions = allTuitions.slice(0, 6);
@@ -73,15 +106,11 @@ export default async function Home() {
   return (
     <main className="overflow-hidden">
       <Hero />
-
       <TuitionSearch />
-
       <FeaturedTuitions featuredTuitions={featuredTuitions} />
-
       <PopularSubjects subjects={popularSubjects} />
-
+      <PlatformStats stats={platformStats} />
       <HowItWorks steps={steps} />
-
       <PricingPreview />
     </main>
   );
