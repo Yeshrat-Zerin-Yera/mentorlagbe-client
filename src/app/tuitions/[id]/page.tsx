@@ -11,6 +11,7 @@ import {
   Monitor,
   Banknote,
 } from "lucide-react";
+import ApplicationForm from "@/components/tuitions/ApplicationForm";
 
 type Tuition = {
   _id: string;
@@ -232,16 +233,8 @@ export default async function TuitionDetailsPage({
 
           <div className="my-7 border-t border-[#e3ece9]" />
 
-          <Link
-            href="/sign-in"
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#087f78] px-5 py-4 font-bold text-white transition hover:bg-[#06645f]"
-          >
-            Sign In to Apply
-          </Link>
+          <ApplicationForm tuitionId={tuition._id} />
 
-          <p className="mt-4 text-center text-xs leading-5 text-[#64777d]">
-            Sign in with your student account to apply for this tuition.
-          </p>
         </aside>
       </section>
     </main>
