@@ -13,6 +13,7 @@ import {
     ArrowLeft,
 } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const API_URL =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
@@ -166,12 +167,20 @@ export default function PostTuitionPage() {
 
             if (!response.ok || !result.success) {
                 setSubmitError(
-                    result.message || "Failed to submit tuition."
+                    "Something went wrong. Please check your connection and try again."
+                );
+
+                toast.error(
+                    "Something went wrong. Please check your connection and try again."
                 );
                 return;
             }
 
             setSuccessMessage(
+                "Tuition submitted successfully! It is now waiting for admin approval."
+            );
+
+            toast.success(
                 "Tuition submitted successfully! It is now waiting for admin approval."
             );
 
@@ -543,8 +552,8 @@ export default function PostTuitionPage() {
                         {uploading
                             ? "Uploading Image..."
                             : isSubmitting
-                              ? "Submitting..."
-                              : "Submit Tuition"}
+                                ? "Submitting..."
+                                : "Submit Tuition"}
                     </button>
                 </div>
             </form>

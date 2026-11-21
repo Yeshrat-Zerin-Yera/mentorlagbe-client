@@ -1,37 +1,140 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# MentorLagbe – Smart Tuition & Mentorship Platform
 
-First, run the development server:
+MentorLagbe is a full-stack tuition and mentorship platform that connects students with qualified tutors. Students can discover tuition opportunities and apply, tutors can manage tuition posts and applicants, and admins can manage the platform.
+
+## Live Website
+
+Add your deployed frontend URL here.
+
+## Features
+
+### Public Features
+- Responsive homepage with featured tuitions and popular subjects.
+- Browse approved and active tuition opportunities.
+- Search and filter tuitions by subject, class level, and mode.
+- View detailed tuition information.
+- User registration and login.
+
+### Student Dashboard
+- View application statistics.
+- Browse and manage submitted applications.
+- Cancel pending applications.
+- View current subscription plan.
+- Manage profile information.
+
+### Tutor Dashboard
+- View tuition and applicant statistics.
+- Create tuition posts with image uploads.
+- Manage, edit, activate, and delete tuition posts.
+- Accept or reject student applications.
+- Upgrade to the Pro subscription plan.
+
+### Admin Dashboard
+- View platform statistics.
+- Manage users and roles.
+- Approve or reject tuition posts.
+- View payment transactions and revenue.
+
+### Additional Features
+- Better Auth authentication with JWT.
+- Role-based dashboard navigation.
+- Stripe payment integration.
+- ImgBB image uploads.
+- Sonner toast notifications.
+- Custom loading, error, and 404 pages.
+- Responsive dashboard with collapsible sidebar.
+
+## Technologies Used
+
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Node.js
+- Express.js
+- MongoDB
+- Better Auth
+- Stripe
+- ImgBB
+- Sonner
+- Lucide React
+
+## Installation
+
+### Prerequisites
+
+- Node.js and npm
+- Running MentorLagbe backend
+- MongoDB database
+
+### Clone the Repository
+
+```bash
+git clone YOUR_CLIENT_REPOSITORY_URL
+```
+
+Navigate to the project directory:
+
+```bash
+cd mentorlagbe-client
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+### Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
+
+Add any other environment variables required by your project.
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### Start Production Server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## User Roles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Role | Permissions |
+|---|---|
+| Student | Browse tuitions, apply, and manage applications |
+| Tutor | Post tuitions and manage applicants |
+| Admin | Manage users, moderate tuitions, and monitor payments |
 
-## Deploy on Vercel
+## Subscription Plans
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| User | Pro Plan |
+|---|---:|
+| Student | $10 |
+| Tutor | $15 |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# mentorlagbe-client" 
+## Backend Repository
+
+Add your actual backend GitHub repository URL here.
+
+## Developer
+
+Add your name and relevant GitHub or LinkedIn profile links here.
