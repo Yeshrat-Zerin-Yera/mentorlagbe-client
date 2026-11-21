@@ -44,7 +44,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-3 px-5 py-6 text-sm text-[#b7c7c8] sm:flex-row lg:px-8">
-          <p>© {new Date().getFullYear()} MentorLagbe. All rights reserved.</p>
+          <p>© 2026 MentorLagbe. All rights reserved.</p>
           <p>Built to make learning better.</p>
         </div>
       </div>

@@ -15,8 +15,7 @@ import {
 import Link from "next/link";
 import { toast } from "sonner";
 
-const API_URL =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+import { API_URL } from "@/lib/api";
 
 type TuitionFormData = {
     title: string;

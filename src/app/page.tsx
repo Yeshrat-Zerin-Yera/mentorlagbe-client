@@ -9,6 +9,8 @@ import PlatformStats from "@/components/home/PlatformStats";
 import HowItWorks from "@/components/home/HowItWorks";
 import PricingPreview from "@/components/home/PricingPreview";
 import { Search, Users, GraduationCap } from "lucide-react";
+import { connection } from "next/server";
+import { API_URL } from "@/lib/api";
 
 type PlatformStatsData = {
   totalTuitions: number;
@@ -54,11 +56,12 @@ const steps = [
 ];
 
 export default async function Home() {
+  await connection();
   let allTuitions: Tuition[] = [];
   let platformStats: PlatformStatsData = emptyStats;
 
   try {
-    const response = await fetch("http://localhost:5000/api/tuitions", {
+    const response = await fetch(`${API_URL}/tuitions`, {
       cache: "no-store",
     });
 
@@ -72,7 +75,7 @@ export default async function Home() {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/api/tuitions/stats",
+      `${API_URL}/tuitions/stats`,
       {
         cache: "no-store",
       }

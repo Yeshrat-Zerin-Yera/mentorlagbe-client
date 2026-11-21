@@ -15,6 +15,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { API_ORIGIN as API_URL } from "@/lib/api";
 
 type Application = {
   _id: string;
@@ -33,8 +34,6 @@ type ApplicationsResponse = {
   message: string;
   data: Application[];
 };
-
-const API_URL = "http://localhost:5000";
 
 const statusStyles = {
   pending: "bg-amber-100 text-amber-700",

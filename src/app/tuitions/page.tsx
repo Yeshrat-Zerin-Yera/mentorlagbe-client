@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { API_URL } from "@/lib/api";
 
 type Tuition = {
   _id: string;
@@ -43,8 +44,6 @@ type StatsResponse = {
     popularSubjects?: { name: string; count: number }[];
   };
 };
-
-const API_URL = "http://localhost:5000/api";
 
 async function getTuitions(
   params: Record<string, string>

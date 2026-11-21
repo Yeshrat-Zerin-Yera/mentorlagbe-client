@@ -4,6 +4,7 @@
 import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
 import { ImagePlus, LoaderCircle, Save, UserRound } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { API_ORIGIN } from "@/lib/api";
 
 type Profile = {
   id: string;
@@ -17,7 +18,7 @@ type Profile = {
   createdAt: string;
 };
 
-const API_URL = "http://localhost:5000";
+const API_URL = API_ORIGIN;
 
 export default function ProfilePage() {
   const { data: session, isPending } = authClient.useSession();

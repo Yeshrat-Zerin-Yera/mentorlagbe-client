@@ -13,6 +13,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { API_URL } from "@/lib/api";
 
 type PaymentStatus = "checking" | "confirmed" | "pending" | "error";
 
@@ -39,7 +40,7 @@ function PaymentSuccessContent() {
         }
 
         const response = await fetch(
-          "http://localhost:5000/api/users/me",
+          `${API_URL}/users/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

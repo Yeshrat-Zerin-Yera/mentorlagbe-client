@@ -4,6 +4,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import { API_URL } from "@/lib/api";
 
 type ApplicationFormProps = {
   tuitionId: string;
@@ -42,7 +43,7 @@ export default function ApplicationForm({
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/applications",
+        `${API_URL}/applications`,
         {
           method: "POST",
           headers: {

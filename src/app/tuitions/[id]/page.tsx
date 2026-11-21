@@ -12,6 +12,7 @@ import {
   Banknote,
 } from "lucide-react";
 import ApplicationForm from "@/components/tuitions/ApplicationForm";
+import { API_URL } from "@/lib/api";
 
 type Tuition = {
   _id: string;
@@ -35,7 +36,7 @@ async function getTuition(id: string): Promise<Tuition | null> {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/tuitions/${id}`,
+      `${API_URL}/tuitions/${id}`,
       { cache: "no-store" }
     );
 

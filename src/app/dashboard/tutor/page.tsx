@@ -14,8 +14,7 @@ import {
   Clock,
   LoaderCircle,
 } from "lucide-react";
-
-const API_URL = "http://localhost:5000";
+import { API_ORIGIN as API_URL } from "@/lib/api";
 
 type Tuition = {
   _id: string;

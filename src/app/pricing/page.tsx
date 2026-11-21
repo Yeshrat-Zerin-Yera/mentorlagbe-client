@@ -12,8 +12,7 @@ import {
     Users,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-
-const API_URL = "http://localhost:5000";
+import { API_ORIGIN as API_URL } from "@/lib/api";
 
 export default function PricingPage() {
     const { data: session, isPending } = authClient.useSession();

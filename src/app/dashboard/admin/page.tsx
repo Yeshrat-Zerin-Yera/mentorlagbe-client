@@ -20,9 +20,8 @@ import {
     CreditCard,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { API_URL } from "@/lib/api";
 
-const API_URL =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
 type AdminStats = {
     totalUsers: number;
