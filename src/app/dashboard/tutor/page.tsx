@@ -214,7 +214,7 @@ export default function TutorDashboardPage() {
 
         <Link
           href="/dashboard/tutor/post-tuition"
-          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#267653] transition hover:bg-green-50"
+          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold !text-[#267653] transition hover:bg-green-50"
         >
           <Plus size={18} />
           Post a Tuition
