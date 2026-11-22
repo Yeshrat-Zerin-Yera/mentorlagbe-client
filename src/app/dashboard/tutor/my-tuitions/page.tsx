@@ -273,15 +273,19 @@ export default function MyTuitionsPage() {
 
             setEditingTuition(null);
             setEditForm(emptyEditForm);
-            setMessage(
-                "Tuition updated successfully. It is now waiting for admin approval."
-            );
+            const message =
+                "Tuition updated successfully. It is now waiting for admin approval.";
+
+            setMessage(message);
+            toast.success(message);
         } catch (error) {
-            setEditError(
+            const message =
                 error instanceof Error
                     ? error.message
-                    : "Failed to update tuition."
-            );
+                    : "Failed to update tuition.";
+
+            setEditError(message);
+            toast.error(message);
         } finally {
             setSaving(false);
         }
