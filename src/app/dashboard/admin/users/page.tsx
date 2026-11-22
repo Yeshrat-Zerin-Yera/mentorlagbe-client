@@ -14,6 +14,7 @@ import {
     UserRound,
     Crown,
 } from "lucide-react";
+import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { API_URL } from "@/lib/api";
 
@@ -174,11 +175,18 @@ export default function AdminUsersPage() {
                 )
             );
 
-            setNotice(`${user.name}'s role was updated to ${newRole}.`);
+            const message = `${user.name}'s role was updated to ${newRole}.`;
+
+            setNotice(message);
+            toast.success(message);
         } catch (err) {
-            setError(
-                err instanceof Error ? err.message : "Could not update user role."
-            );
+            const message =
+                err instanceof Error
+                    ? err.message
+                    : "Could not update user role.";
+
+            setError(message);
+            toast.error(message);
         } finally {
             setUpdatingId(null);
         }
