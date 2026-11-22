@@ -1,4 +1,3 @@
-
 @import "tailwindcss";
 
 :root {
@@ -51,4 +50,28 @@ a {
 ::selection {
   background: #b9e5dc;
   color: #142b35;
+}
+
+
+/* Subtle homepage entrance animation */
+@keyframes gentleFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-animate {
+  animation: gentleFadeUp 0.7s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-animate {
+    animation: none;
+  }
 }
