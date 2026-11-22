@@ -182,7 +182,7 @@ export default function Navbar() {
 
               <Link
                 href="/sign-up"
-                className="rounded-xl bg-[#087f78] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#06645f]"
+                className="rounded-xl bg-[#087f78] px-4 py-2.5 text-sm font-bold !text-white transition hover:bg-[#06645f]"
               >
                 Get Started →
               </Link>
