@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { API_URL } from "@/lib/api";
+import { toast } from "sonner";
 
 type ApplicationStatus = "pending" | "accepted" | "rejected";
 
@@ -233,18 +234,22 @@ export default function TutorApplicantsPage() {
                 );
             }
 
-            setNotice(
+            const message =
                 result.message ||
-                    `Application ${status} successfully.`
-            );
+                `Application ${status} successfully.`;
+
+            setNotice(message);
+            toast.success(message);
 
             await fetchApplicants(pagination.page);
         } catch (err) {
-            setError(
+            const message =
                 err instanceof Error
                     ? err.message
-                    : "Failed to update application."
-            );
+                    : "Failed to update application.";
+
+            setError(message);
+            toast.error(message);
         } finally {
             setActionId(null);
         }
@@ -376,11 +381,10 @@ export default function TutorApplicantsPage() {
                                     setStatusFilter(option.value);
                                     setSearch("");
                                 }}
-                                className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
-                                    statusFilter === option.value
-                                        ? "bg-emerald-600 text-white shadow-sm"
-                                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                                }`}
+                                className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${statusFilter === option.value
+                                    ? "bg-emerald-600 text-white shadow-sm"
+                                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                    }`}
                             >
                                 {option.label}
                             </button>
@@ -434,8 +438,8 @@ export default function TutorApplicantsPage() {
                         {search
                             ? "Try another search term."
                             : statusFilter === "all"
-                              ? "You haven't received any applications yet."
-                              : `There are no ${statusFilter} applications right now.`}
+                                ? "You haven't received any applications yet."
+                                : `There are no ${statusFilter} applications right now.`}
                     </p>
                 </div>
             ) : (
