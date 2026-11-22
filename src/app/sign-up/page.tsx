@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { GraduationCap, UserRound, BookOpen, Loader2 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 type UserRole = "student" | "tutor";
 
@@ -52,13 +53,18 @@ export default function SignUpPage() {
                 signUpOptions as Parameters<typeof authClient.signUp.email>[0]
             );
             if (signUpError) {
-                setError(signUpError.message || "Registration failed. Please try again.");
+                const message = signUpError.message || "Registration failed. Please try again.";
+                setError(message);
+                toast.error(message);
                 return;
             }
 
+            toast.success("Account created successfully!");
             router.push("/sign-in?registered=true");
         } catch {
-            setError("Something went wrong. Please try again.");
+            const message = "Something went wrong. Please try again.";
+            setError(message);
+            toast.error(message);
         } finally {
             setLoading(false);
         }
