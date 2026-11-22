@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { API_URL } from "@/lib/api";
+import { toast } from "sonner";
 
 type ApplicationFormProps = {
   tuitionId: string;
@@ -38,7 +39,9 @@ export default function ApplicationForm({
         await authClient.token();
 
       if (tokenError || !tokenData?.token) {
-        setMessage("Your session has expired. Please sign in again.");
+        const message = "Your session has expired. Please sign in again.";
+        setMessage(message);
+        toast.error(message);
         return;
       }
 
@@ -62,19 +65,24 @@ export default function ApplicationForm({
       const result = await response.json();
 
       if (!response.ok) {
-        setMessage(result.message || "Failed to submit your application.");
+        const message = result.message || "Failed to submit your application.";
+        setMessage(message);
+        toast.error(message);
         return;
       }
 
       setSuccess(true);
       setMessage("Your application was submitted successfully!");
+      toast.success("Your application was submitted successfully!");
 
       setStudentPhone("");
       setPreferredSchedule("");
       setStudentNote("");
     } catch (error) {
       console.error("Application submission error:", error);
-      setMessage("Something went wrong. Please try again.");
+      const message = "Something went wrong. Please try again.";
+      setMessage(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -212,11 +220,10 @@ export default function ApplicationForm({
       {message && (
         <p
           role="alert"
-          className={`rounded-xl p-3 text-sm ${
-            success
-              ? "bg-green-50 text-green-700"
-              : "bg-red-50 text-red-700"
-          }`}
+          className={`rounded-xl p-3 text-sm ${success
+            ? "bg-green-50 text-green-700"
+            : "bg-red-50 text-red-700"
+            }`}
         >
           {message}
         </p>
