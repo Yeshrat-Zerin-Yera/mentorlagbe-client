@@ -11,6 +11,7 @@ import {
     BookOpen,
     Users,
 } from "lucide-react";
+import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { API_ORIGIN as API_URL } from "@/lib/api";
 
@@ -37,11 +38,16 @@ export default function PricingPage() {
         }
 
         if (role !== "student" && role !== "tutor") {
-            setError("Only student and tutor accounts can purchase Pro plans.");
+            const message = "Only student and tutor accounts can purchase Pro plans.";
+            setError(message);
+            toast.error(message);
             return;
         }
 
         setLoading(true);
+        toast.loading("Preparing your secure checkout...", {
+            id: "stripe-checkout",
+        });
 
         try {
 
@@ -50,7 +56,9 @@ export default function PricingPage() {
             const token = tokenData?.token;
 
             if (tokenError || !token) {
-                setError("Your session has expired. Please sign in again.");
+                const message = "Your session has expired. Please sign in again.";
+                setError(message);
+                toast.error(message);
                 return;
             }
 
@@ -73,14 +81,17 @@ export default function PricingPage() {
                     result.message || "Unable to create checkout session."
                 );
             }
-
+            toast.dismiss("stripe-checkout");
             window.location.href = result.url;
         } catch (err) {
-            setError(
+            const message =
                 err instanceof Error
                     ? err.message
-                    : "Something went wrong. Please try again."
-            );
+                    : "Something went wrong. Please try again.";
+
+            setError(message);
+            toast.dismiss("stripe-checkout");
+            toast.error(message);
         } finally {
             setLoading(false);
         }
