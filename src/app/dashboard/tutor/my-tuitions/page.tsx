@@ -18,6 +18,7 @@ import {
     CalendarDays,
     Users,
 } from "lucide-react";
+import { toast } from "sonner";
 
 import { API_URL } from "@/lib/api";
 
@@ -324,13 +325,20 @@ export default function MyTuitionsPage() {
                 )
             );
 
-            setMessage(result.message || "Tuition status updated.");
+            const message = tuition.isActive
+                ? "Tuition deactivated successfully."
+                : "Tuition activated successfully.";
+
+            setMessage(message);
+            toast.success(message);
         } catch (error) {
-            setPageError(
+            const message =
                 error instanceof Error
                     ? error.message
-                    : "Failed to update tuition status."
-            );
+                    : "Failed to update tuition status.";
+
+            setPageError(message);
+            toast.error(message);
         } finally {
             setActionId("");
         }
@@ -373,12 +381,15 @@ export default function MyTuitionsPage() {
             );
 
             setMessage("Tuition post deleted successfully.");
+            toast.success("Tuition deleted successfully.");
         } catch (error) {
-            setPageError(
+            const message =
                 error instanceof Error
                     ? error.message
-                    : "Failed to delete tuition."
-            );
+                    : "Failed to delete tuition.";
+
+            setPageError(message);
+            toast.error(message);
         } finally {
             setActionId("");
         }
@@ -695,17 +706,16 @@ export default function MyTuitionsPage() {
                                                         handleToggleActive(tuition)
                                                     }
                                                     disabled={actionId === tuition._id}
-                                                    className={`rounded-lg px-3 py-2 text-xs font-semibold disabled:opacity-50 ${
-                                                        tuition.isActive
-                                                            ? "border border-amber-200 text-amber-700 hover:bg-amber-50"
-                                                            : "border border-emerald-200 text-emerald-700 hover:bg-emerald-50"
-                                                    }`}
+                                                    className={`rounded-lg px-3 py-2 text-xs font-semibold disabled:opacity-50 ${tuition.isActive
+                                                        ? "border border-amber-200 text-amber-700 hover:bg-amber-50"
+                                                        : "border border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+                                                        }`}
                                                 >
                                                     {actionId === tuition._id
                                                         ? "Please wait..."
                                                         : tuition.isActive
-                                                          ? "Deactivate"
-                                                          : "Activate"}
+                                                            ? "Deactivate"
+                                                            : "Activate"}
                                                 </button>
 
                                                 <button
