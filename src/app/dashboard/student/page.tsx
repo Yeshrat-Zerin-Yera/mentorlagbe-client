@@ -244,7 +244,7 @@ export default function StudentDashboardPage() {
 
           <Link
             href="/tuitions"
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold transition hover:bg-green-50"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-green-50"
           >
             Browse Tuitions
             <ArrowRight className="h-4 w-4" />
@@ -384,13 +384,12 @@ export default function StudentDashboardPage() {
 
                   <div className="flex shrink-0 items-center justify-between gap-4 sm:justify-end">
                     <span
-                      className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${
-                        application.status === "accepted"
+                      className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${application.status === "accepted"
                           ? "bg-emerald-100 text-emerald-700"
                           : application.status === "rejected"
                             ? "bg-red-100 text-red-700"
                             : "bg-amber-100 text-amber-700"
-                      }`}
+                        }`}
                     >
                       {application.status}
                     </span>
