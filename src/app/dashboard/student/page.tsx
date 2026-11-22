@@ -244,7 +244,7 @@ export default function StudentDashboardPage() {
 
           <Link
             href="/tuitions"
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-green-50"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold !text-[#267653] transition hover:bg-green-50"
           >
             Browse Tuitions
             <ArrowRight className="h-4 w-4" />
