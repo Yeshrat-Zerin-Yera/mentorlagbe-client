@@ -137,8 +137,11 @@ npm start
 
 ## Backend Repository
 
-Add your actual backend GitHub repository URL here.
+[https://github.com/Yeshrat-Zerin-Yera/mentorlagbe-server](https://github.com/Yeshrat-Zerin-Yera/mentorlagbe-server)
 
 ## Developer
 
-Add your name and relevant GitHub or LinkedIn profile links here.
+**Yeshrat Zerin Yera**
+
+- GitHub: https://github.com/Yeshrat-Zerin-Yera
+- LinkedIn: https://www.linkedin.com/in/yeshrat-zerin-yera/
