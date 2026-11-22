@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { API_ORIGIN as API_URL } from "@/lib/api";
+import { toast } from "sonner";
 
 type Application = {
   _id: string;
@@ -142,13 +143,18 @@ export default function MyApplicationsPage() {
         current.filter((item) => item._id !== application._id)
       );
 
-      setSuccess("Your application was cancelled successfully.");
+      const message = "Your application was cancelled successfully.";
+
+      setSuccess(message);
+      toast.success(message);
     } catch (err) {
-      setError(
+      const message =
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again."
-      );
+          : "Something went wrong. Please try again.";
+
+      setError(message);
+      toast.error(message);
     } finally {
       setCancellingId("");
     }
@@ -307,9 +313,8 @@ export default function MyApplicationsPage() {
                   <div className="min-w-0">
                     <div className="mb-3 flex flex-wrap items-center gap-2">
                       <span
-                        className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${
-                          statusStyles[application.status]
-                        }`}
+                        className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${statusStyles[application.status]
+                          }`}
                       >
                         {application.status}
                       </span>
