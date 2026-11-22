@@ -11,6 +11,7 @@ export type Tuition = {
   location: string;
   monthlyFee: number;
   tutorName: string;
+  bannerImage?: string;
 };
 
 type FeaturedTuitionsProps = {
@@ -49,10 +50,18 @@ export default function FeaturedTuitions({
             key={tuition._id}
             className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#e3ece9] bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#142b35]/5"
           >
-            <div className="flex h-40 items-center justify-center bg-gradient-to-br from-[#dff1eb] to-[#f0f7f4]">
-              <span className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-4xl font-extrabold text-[#087f78] shadow-lg">
-                {tuition.subject.charAt(0)}
-              </span>
+            <div className="flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-[#dff1eb] to-[#f0f7f4]">
+              {tuition.bannerImage ? (
+                <img
+                  src={tuition.bannerImage}
+                  alt={tuition.subject}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <span className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-4xl font-extrabold text-[#087f78] shadow-lg">
+                  {tuition.subject.charAt(0)}
+                </span>
+              )}
             </div>
 
             <div className="flex flex-1 flex-col p-6">
