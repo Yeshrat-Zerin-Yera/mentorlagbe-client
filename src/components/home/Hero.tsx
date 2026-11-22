@@ -36,7 +36,7 @@ export default function Hero() {
           <div className="mt-9 flex flex-wrap gap-4">
             <Link
               href="/tuitions"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#087f78] px-6 py-4 font-bold text-white shadow-lg shadow-[#087f78]/20 transition hover:-translate-y-1 hover:bg-[#06645f]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#087f78] px-6 py-4 font-bold !text-white shadow-lg shadow-[#087f78]/20 transition hover:-translate-y-1 hover:bg-[#06645f]"
             >
               Browse Tuitions <ArrowRight size={19} />
             </Link>
