@@ -3,6 +3,7 @@
 
 import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
 import { ImagePlus, LoaderCircle, Save, UserRound } from "lucide-react";
+import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { API_ORIGIN } from "@/lib/api";
 
@@ -100,12 +101,15 @@ export default function ProfilePage() {
 
       setImage(saveResult.data.image || imageUrl);
       setProfile(saveResult.data);
-      setSuccess("Profile picture saved successfully.");
-      setSuccess("Image uploaded. Click Save Profile to apply it.");
+      const message = "Profile picture saved successfully.";
+      setSuccess(message);
+      toast.success(message);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Image upload failed."
-      );
+      const message =
+        err instanceof Error ? err.message : "Image upload failed.";
+
+      setError(message);
+      toast.error(message);
     } finally {
       setUploadingImage(false);
       event.target.value = "";
@@ -248,11 +252,15 @@ export default function ProfilePage() {
       setBio(result.data.bio || "");
       setImage(result.data.image || "");
 
-      setSuccess("Your profile has been updated successfully.");
+      const message = "Your profile has been updated successfully.";
+      setSuccess(message);
+      toast.success(message);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Something went wrong."
-      );
+      const message =
+        err instanceof Error ? err.message : "Something went wrong.";
+
+      setError(message);
+      toast.error(message);
     } finally {
       setSaving(false);
     }
