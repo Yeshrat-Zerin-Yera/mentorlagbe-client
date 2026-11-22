@@ -19,6 +19,7 @@ import {
     Eye,
     X,
 } from "lucide-react";
+import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { API_URL } from "@/lib/api";
 
@@ -214,13 +215,19 @@ export default function AdminTuitionsPage() {
 
             setSelectedTuition(null);
             await fetchTuitions(pagination.page, statusFilter);
-            setNotice(result.message || `Tuition ${action}d successfully.`);
+            const message =
+                result.message || `Tuition ${action}d successfully.`;
+
+            setNotice(message);
+            toast.success(message);
         } catch (err) {
-            setError(
+            const message =
                 err instanceof Error
                     ? err.message
-                    : "Failed to update tuition status."
-            );
+                    : "Failed to update tuition status.";
+
+            setError(message);
+            toast.error(message);
         } finally {
             setProcessingId(null);
         }
@@ -393,8 +400,8 @@ export default function AdminTuitionsPage() {
                                 key={tab.value}
                                 onClick={() => setStatusFilter(tab.value)}
                                 className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${active
-                                        ? "bg-emerald-600 text-white shadow-sm"
-                                        : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+                                    ? "bg-emerald-600 text-white shadow-sm"
+                                    : "bg-gray-50 text-gray-600 hover:bg-gray-100"
                                     }`}
                             >
                                 <Icon className="h-4 w-4" />
@@ -476,7 +483,7 @@ export default function AdminTuitionsPage() {
                                         <span
                                             className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${statusStyles[
                                                 tuition.approvalStatus
-                                                ]
+                                            ]
                                                 }`}
                                         >
                                             {tuition.approvalStatus}
