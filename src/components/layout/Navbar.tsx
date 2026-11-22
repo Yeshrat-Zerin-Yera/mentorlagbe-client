@@ -285,7 +285,7 @@ export default function Navbar() {
                     <Link
                       href="/sign-up"
                       onClick={closeMenus}
-                      className="flex-1 rounded-xl bg-[#087f78] px-4 py-3 text-center text-sm font-bold text-white"
+                      className="flex-1 rounded-xl bg-[#087f78] px-4 py-3 text-center text-sm font-bold !text-white"
                     >
                       Get Started
                     </Link>
