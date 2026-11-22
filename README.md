@@ -11,6 +11,23 @@ MentorLagbe is a full-stack tuition and mentorship platform that connects studen
 
 [https://mentorlagbe-server-87cn.onrender.com](https://mentorlagbe-server-87cn.onrender.com)
 
+## Backend Repository
+
+[https://github.com/Yeshrat-Zerin-Yera/mentorlagbe-server](https://github.com/Yeshrat-Zerin-Yera/mentorlagbe-server)
+
+## Demo Admin Credentials
+
+Use the following credentials to explore the Admin Dashboard:
+
+- **Email:** admin@mentorlagbe.com
+- **Password:** Admin123!
+
+### Admin Features
+- View platform statistics
+- Manage users and roles
+- Approve or reject tuition posts
+- View payment transactions
+
 ## Features
 
 ### Public Features
@@ -135,9 +152,6 @@ npm start
 | Student | $10 |
 | Tutor | $15 |
 
-## Backend Repository
-
-[https://github.com/Yeshrat-Zerin-Yera/mentorlagbe-server](https://github.com/Yeshrat-Zerin-Yera/mentorlagbe-server)
 
 ## Developer
 
