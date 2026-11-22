@@ -344,7 +344,7 @@ export default function TutorDashboardPage() {
             </p>
             <Link
               href="/dashboard/tutor/post-tuition"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#267653] px-4 py-2.5 text-sm font-semibold !text-[#267653] hover:bg-[#1d6042]"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#267653] px-4 py-2.5 text-sm font-semibold !text-white hover:bg-[#1d6042]"
             >
               <Plus size={17} />
               Post a Tuition
