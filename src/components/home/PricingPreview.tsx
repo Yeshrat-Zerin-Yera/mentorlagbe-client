@@ -80,7 +80,7 @@ export default function PricingPreview() {
 
           <Link
             href="/pricing"
-            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#087f78] px-5 py-4 font-bold text-white transition hover:bg-[#06645f]"
+            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#087f78] px-5 py-4 font-bold !text-white transition hover:bg-[#06645f]"
           >
             Explore Pro Plans <ArrowRight size={18} />
           </Link>

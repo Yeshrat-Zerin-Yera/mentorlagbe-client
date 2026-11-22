@@ -88,7 +88,7 @@ export default function PopularSubjects({
         <div className="mt-10 text-center">
           <Link
             href="/tuitions"
-            className="inline-flex items-center justify-center rounded-xl bg-[#087f78] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#06645f]"
+            className="inline-flex items-center justify-center rounded-xl bg-[#087f78] px-6 py-3.5 text-sm font-bold !text-white transition hover:bg-[#06645f]"
           >
             Browse All Tuitions
           </Link>
