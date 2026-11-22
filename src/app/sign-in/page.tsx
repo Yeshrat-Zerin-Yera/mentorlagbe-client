@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { GraduationCap, Loader2, LogIn } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 function SignInForm() {
   const router = useRouter();
@@ -36,14 +37,19 @@ function SignInForm() {
       });
 
       if (signInError) {
-        setError(signInError.message || "Invalid email or password.");
+        const message = signInError.message || "Invalid email or password.";
+        setError(message);
+        toast.error(message);
         return;
       }
 
+      toast.success("Welcome back!");
       router.replace("/");
       router.refresh();
     } catch {
-      setError("Something went wrong. Please try again.");
+      const message = "Something went wrong. Please try again.";
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
